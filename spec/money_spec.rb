@@ -35,6 +35,19 @@ describe Money do
         money2 = Money.new(1, 2)
         expect(money1.hash).to eq(money2.hash)
       end
+
+      it "symmetric property" do
+        money1 = Money.new(1, 2)
+        money2 = Money.new(1, 2)
+        expect(money1).to eq(money2) and expect(money2).to eq(money1)
+      end
+
+      it "transitive property" do
+        money1 = Money.new(1, 2)
+        money2 = Money.new(1, 2)
+        money3 = Money.new(1, 2)
+        expect(money1).to eq(money2) and expect(money2).to eq(money3) and expect(money3).to eq(money1)
+      end
     end
   end
 end

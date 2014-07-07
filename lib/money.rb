@@ -3,7 +3,7 @@ class Money
   attr_reader :rupee
 
   def initialize money_rupee, money_paise
-    
+
     if money_rupee < 0
       money_paise *= -1
     end
