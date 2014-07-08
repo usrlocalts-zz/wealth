@@ -14,7 +14,6 @@ class Money
      return false if money.nil?
      return false if self.class != money.class
      @value == money.value
-
   end
 
   def hash
@@ -40,6 +39,10 @@ class Money
   def to_s
     rupee, paise = denomination @value
     "#{rupee} Rs. #{paise} p."
+  end
+
+  def <=> other
+    @value <=> other.value
   end
 
   private

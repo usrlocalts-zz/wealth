@@ -15,7 +15,7 @@ describe Money do
 
     context "Equality checks" do
       let(:money) do
-        money = Money.new(1, 2)
+        Money.new(1, 2)
       end
       it "should be equal for same object id" do
         expect(money).to eq(money)
@@ -54,6 +54,16 @@ describe Money do
     it '"2 Rs. 50 p." if money is Rs 2 50p' do
       money = Money.new(2, 50)
       expect(money.to_s).to eq("2 Rs. 50 p.")
+    end
+  end
+
+  context 'sort' do
+    it "returns sorted money list for Rs 2 25p, Rs 1 2p and Rs 1 and 25p " do
+
+    money1 = Money.new(2, 25)
+    money2 = Money.new(1, 2)
+    money3 = Money.new(1, 25)
+   expect([money1, money2, money3].sort).to eq([money2, money3, money1])
     end
   end
 end
