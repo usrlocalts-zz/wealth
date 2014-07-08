@@ -1,13 +1,10 @@
 #Models money in rupees and paise
 class Money
-  attr_reader :rupee
+  attr_reader :value
 
   def initialize money_rupee, money_paise
 
-    if money_rupee < 0
-      money_paise *= -1
-    end
-    @rupee = money_rupee*100 + money_paise
+    @value = money_rupee*100 + money_paise
 
   end
 
@@ -16,12 +13,12 @@ class Money
      return true if self.object_id == money.object_id
      return false if money.nil?
      return false if self.class != money.class
-     @rupee == money.rupee
+     @value == money.value
 
   end
 
   def hash
-    37 * @rupee.hash
+    37 * @value.hash
   end
 
   def eql? other
@@ -29,22 +26,20 @@ class Money
   end
 
   def + money
-    amount = @rupee + money.rupee
-    amount_rupee = @rupee/100
-    amount_paise = amount - amount_rupee*100
-    Money.new(amount_rupee, amount_paise)
+    amount = @value + money.value
+    rupee, paise = denomination amount
+    Money.new(rupee, paise)
   end
 
   def - money
-    amount = @rupee - money.rupee
-    amount_rupee = @rupee/100
-    amount_paise = amount - amount_rupee*100
-    Money.new(amount_rupee, amount_paise)
+    amount = @value - money.value
+    rupee, paise = denomination amount
+    Money.new(rupee, paise)
   end
 
   def to_s
-    rupee, paise = denomination @rupee
-    "#{rupee} Rs. #{paise} p"
+    rupee, paise = denomination @value
+    "#{rupee} Rs. #{paise} p."
   end
 
   private

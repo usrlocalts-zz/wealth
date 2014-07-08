@@ -10,7 +10,7 @@ describe Money do
       expect(Money.new(3, 45) - Money.new(2, 20)).to eq(Money.new(1, 25))
     end
     it 'the amount should be Rs.-1, 25p for Rs. 2, 20p and Rs. 3, 45p' do
-      expect(Money.new(2, 20) - Money.new(3, 45)).to eq(Money.new(-1, 25))
+      expect(Money.new(2, 20) - Money.new(3, 45)).to eq(Money.new(-1, -25))
     end
 
     context "Equality checks" do
@@ -51,9 +51,10 @@ describe Money do
     end
   end
   context 'print' do
-    it 'printing 2 Rs. 50 p. if money is Rs 2 50p' do
+    it '"2 Rs. 50 p." if money is Rs 2 50p' do
       money = Money.new(2, 50)
-      expect(money.to_s).to eq("2 Rs. 50 p")
+      expect(money.to_s).to eq("2 Rs. 50 p.")
     end
   end
 end
+
