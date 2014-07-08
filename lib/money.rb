@@ -13,10 +13,10 @@ class Money
 
   def == money
 
-    return true if self.object_id == money.object_id
-    return false if money.nil?
-    return false if self.class != money.class
-    @rupee == money.rupee
+     return true if self.object_id == money.object_id
+     return false if money.nil?
+     return false if self.class != money.class
+     @rupee == money.rupee
 
   end
 
@@ -30,16 +30,27 @@ class Money
 
   def + money
     amount = @rupee + money.rupee
-    amount_rupee = @rupee%100
+    amount_rupee = @rupee/100
     amount_paise = amount - amount_rupee*100
     Money.new(amount_rupee, amount_paise)
   end
 
   def - money
     amount = @rupee - money.rupee
-    amount_rupee = @rupee%100
+    amount_rupee = @rupee/100
     amount_paise = amount - amount_rupee*100
     Money.new(amount_rupee, amount_paise)
   end
+
+  def to_s
+    rupee, paise = denomination @rupee
+    "#{rupee} Rs. #{paise} p"
+  end
+
+  private
+  def denomination amount
+    [amount/100,  amount%100]
+  end
+
 
 end

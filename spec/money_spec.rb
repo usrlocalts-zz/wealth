@@ -7,7 +7,7 @@ describe Money do
       expect(Money.new(1, 20) + Money.new(1, 30)).to eq(Money.new(2, 50))
     end
     it 'the amount should be Rs.1, 25p for Rs. 3, 45p and Rs. 2, 20p' do
-     expect(Money.new(3, 45) - Money.new(2, 20)).to eq(Money.new(1, 25))
+      expect(Money.new(3, 45) - Money.new(2, 20)).to eq(Money.new(1, 25))
     end
     it 'the amount should be Rs.-1, 25p for Rs. 2, 20p and Rs. 3, 45p' do
       expect(Money.new(2, 20) - Money.new(3, 45)).to eq(Money.new(-1, 25))
@@ -15,7 +15,7 @@ describe Money do
 
     context "Equality checks" do
       let(:money) do
-        money = Money.new(1,2)
+        money = Money.new(1, 2)
       end
       it "should be equal for same object id" do
         expect(money).to eq(money)
@@ -48,6 +48,12 @@ describe Money do
         money3 = Money.new(1, 2)
         expect(money1).to eq(money2) and expect(money2).to eq(money3) and expect(money3).to eq(money1)
       end
+    end
+  end
+  context 'print' do
+    it 'printing 2 Rs. 50 p. if money is Rs 2 50p' do
+      money = Money.new(2, 50)
+      expect(money.to_s).to eq("2 Rs. 50 p")
     end
   end
 end
