@@ -60,10 +60,62 @@ describe Money do
   context 'sort' do
     it "returns sorted money list for Rs 2 25p, Rs 1 2p and Rs 1 and 25p " do
 
-    money1 = Money.new(2, 25)
-    money2 = Money.new(1, 2)
-    money3 = Money.new(1, 25)
-   expect([money1, money2, money3].sort).to eq([money2, money3, money1])
+      money1 = Money.new(2, 25)
+      money2 = Money.new(1, 2)
+      money3 = Money.new(1, 25)
+      expect([money1, money2, money3].sort).to eq([money2, money3, money1])
+    end
+    it "returns wrong sorted money list for Rs 2 25p, Rs 1 2p and Rs 1 and 25p " do
+
+      money1 = Money.new(2, 25)
+      money2 = Money.new(1, 2)
+      money3 = Money.new(1, 25)
+      expect([money1, money2, money3].sort).to_not eq([money1, money2, money3])
+    end
+  end
+
+
+  context '#<=> comparison' do
+    let(:money1) { Money.new(1, 2) }
+    let(:money2) { Money.new(2, 2) }
+
+    it "should return -1 for Money(1,1) <=> Money(2,2)" do
+      expect(money1<=>money2).to eq(-1)
+    end
+
+    it "should return 1 for Money(2,2) <=> Money(1,1)" do
+      expect(money2 <=> money1).to eq(1)
+    end
+
+    it "should return 0 for Money(1,1) <=> Money(1,1)" do
+      expect(money1 <=> money1).to eq(0)
+    end
+
+    it "should return nil for Money(1,1) <=> Object" do
+      expect(money1<=>Object.new).to eq(nil)
+    end
+
+  end
+  context 'less than and greater Comparison' do
+    it 'Rs 2 50p is less than Rs 3 50p' do
+      money1 = Money.new(2, 50)
+      money2 = Money.new(3, 50)
+      expect(money1).to be < (money2)
+    end
+    it 'Rs 2 50p is not less than Rs 3 50p' do
+      money1 = Money.new(2, 50)
+      money2 = Money.new(3, 50)
+      expect(money2 < money1).to eq(false)
+    end
+    it 'Rs 2 50p is greater than Rs 3 50p' do
+      money1 = Money.new(3, 50)
+      money2 = Money.new(2, 50)
+      expect(money1).to be > (money2)
+    end
+    it 'Rs 2 50p is not greater than Rs 3 50p' do
+      money1 = Money.new(2, 50)
+      money2 = Money.new(3, 50)
+      expect(money1 > money2).to eq(false)
     end
   end
 end

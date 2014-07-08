@@ -2,6 +2,8 @@
 class Money
   attr_reader :value
 
+  include Comparable
+
   def initialize money_rupee, money_paise
 
     @value = money_rupee*100 + money_paise
@@ -42,8 +44,10 @@ class Money
   end
 
   def <=> other
+    return nil if other.class != self.class
     @value <=> other.value
   end
+
 
   private
   def denomination amount
